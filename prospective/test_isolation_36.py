@@ -1,12 +1,13 @@
-import tempfile, unittest
+import tempfile, unittest, os
 from pathlib import Path
 import numpy as np
 from isolation_36 import export,load_fit
 from runner_30 import training_data
-SOURCE=Path('/mnt/data/Dimension Reduction and Matrix Completion.zip')
+SOURCE=Path(os.environ.get('MOVIELENS_SOURCE_ZIP', '/mnt/data/Dimension Reduction and Matrix Completion.zip'))
 class IsolationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        if not SOURCE.is_file(): raise unittest.SkipTest('Original MovieLens source ZIP unavailable; set MOVIELENS_SOURCE_ZIP for isolation integration tests')
         cls.tmp=tempfile.TemporaryDirectory();cls.root=Path(cls.tmp.name)/'export';cls.meta=export(SOURCE,cls.root)
     @classmethod
     def tearDownClass(cls):cls.tmp.cleanup()
