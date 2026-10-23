@@ -1,5 +1,7 @@
 # Matrix Completion on MovieLens: algorithms, choices and evidence
 
+[![Offline package checks](https://github.com/andrea-bianco00/matrix-completion-movielens/actions/workflows/offline-checks.yml/badge.svg)](https://github.com/andrea-bianco00/matrix-completion-movielens/actions/workflows/offline-checks.yml)
+
 **Andrea Bianco · Matteo Mancini** — ENSAI university project, revised as a reproducible educational benchmark.
 
 > **Main finding:** Among the three implemented matrix-completion methods, **SVP** had the lowest validation RMSE. However, a much simpler **regularized user–item bias baseline** performed better than all three. The baseline was selected **before opening the final test**, where it obtained **RMSE 0.878057** on 15,126 held-out ratings. This is a result for our implementations and experimental setup, **not** a universal ranking of algorithms.
@@ -71,6 +73,14 @@ Source: [frozen validation results](prospective/validation_results_34.json) and 
 | Clipped test RMSE (descriptive only) | 0.878004 |
 
 Source: [one-shot final winner result](prospective/final_winner_results_43.json). **We did not evaluate the other model families on the final test.** The test has already been opened and must not be used for further tuning.
+
+## Automated verification: what the green badge means
+
+GitHub Actions installs the declared Python dependencies on an Ubuntu runner and runs `python check_package.py`. It checks recorded release evidence, algorithm unit tests, protocol tests and release-verification tests. The first successful run ([October 23, 2026](https://github.com/andrea-bianco00/matrix-completion-movielens/actions/runs/40006889560)) reported **129 passing tests, 9 skipped tests, and 0 failures** across 138 discovered tests. The 9 skips were **original-dataset-dependent integration tests**, not passes.
+
+A subsequent addition, [synthetic isolation regression tests](prospective/test_synthetic_isolation.py), exercises the published `load_fit` interface on a constructed dataset without distributing MovieLens. It checks that modifying held-out files does not affect loaded training data, that holdout files are absent from the fit directory, and that malformed fit inputs are rejected. These tests **do not** demonstrate operating-system-level access isolation, nor do they substitute for the original-dataset split/export integration tests. **Their CI outcome must be checked separately**; the October 23 count above predates their addition.
+
+To run the dataset-dependent tests locally, supply the authorized original archive via `MOVIELENS_SOURCE_ZIP=/path/to/archive.zip` before running the test suite. Without it, those tests explicitly report `skipped`. The archived experiment's one-shot held-out test is **not** rerun by CI.
 
 ## What the results do *not* prove
 
