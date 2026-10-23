@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+*.zip
+**/ratings.csv
+**/train.csv
+**/validation.csv
+**/test.csv
+**/catalog.json
+**/query.npz
+**/sealed_test/
+**/isolated_export*/
