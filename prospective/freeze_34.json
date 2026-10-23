@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-23",
+  "status": "frozen_before_full_validation",
+  "sha256": {
+    "plan": "3bc10952afcb9d494a483cd8dc323d4392907a0494769b601143f72520a41004",
+    "runner": "07f0c934bb1b36f0fcdad6776777ab11d5bb03e056716b6a4cfcfdb4124fd2bc",
+    "validation": "1e54599577e6bec470dab559305c328e805eefea232c9d7a54d9588a455a9853",
+    "source": "e2e4d3e914d053b17629a38c91c3841fcb2c85d5f650fa3baa124bf3b81962bc"
+  },
+  "runner_sha256": "a23ab3fa19a30dd9a7fbe83f7d0d33fda9e095db4832213fd897bff78cab840d",
+  "note": "Prior validation global mean smoke test disclosed in Audit 33; no test labels used.",
+  "resume_runner_sha256": "69d4bfb5f971dfa69fd19912c4cb40f9e87c7a3d99db28855ccdbba92bac0748",
+  "resume_reason": "Resume after outer tool timeout; grid, fit/scoring and candidate budgets unchanged"
+}

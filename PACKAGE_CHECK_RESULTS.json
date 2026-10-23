@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "python": "3.13.5",
+  "checks": [
+    {
+      "check": "release_integrity",
+      "exit_code": 0,
+      "stdout_tail": "{\n  \"family_winners\": 5,\n  \"model\": \"user_item_bias\",\n  \"os_sandbox_verified\": false,\n  \"test_n\": 15126,\n  \"test_rmse\": 0.8780574841321015,\n  \"verified\": true\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "check": "algorithm_tests",
+      "exit_code": 0,
+      "stdout_tail": "",
+      "stderr_tail": "----------------------------------------------------------------------\nRan 85 tests in 0.456s\n\nOK\n"
+    },
+    {
+      "check": "prospective_tests",
+      "exit_code": 0,
+      "stdout_tail": "",
+      "stderr_tail": "----------------------------------------------------------------------\nRan 55 tests in 10.201s\n\nOK\n"
+    },
+    {
+      "check": "release_tests",
+      "exit_code": 0,
+      "stdout_tail": "",
+      "stderr_tail": "----------------------------------------------------------------------\nRan 3 tests in 0.004s\n\nOK\n"
+    }
+  ],
+  "scope": "offline artifact verification and automated tests only; not a fresh dependency install or Docker isolation test"
+}

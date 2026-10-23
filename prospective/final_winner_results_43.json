@@ -1,0 +1,35 @@
+{
+  "catalog_policy": "full user/movie IDs known in advance",
+  "global_winner": "user_item_bias",
+  "limitations": [
+    "Prior exploratory audits examined MovieLens under other splits",
+    "Test coordinates are available to prediction workers; test labels are not passed",
+    "OS-level Docker isolation has not been executed in this environment",
+    "No hyperparameter adjustments after test evaluation"
+  ],
+  "os_sandbox_verified": false,
+  "results": [
+    {
+      "cold_item_n": 701,
+      "cold_item_rmse": 1.0067756094447387,
+      "family": "user_item_bias",
+      "iterations": 60,
+      "params": {
+        "regularization": 5.0
+      },
+      "peak_rss_kib": 151264,
+      "stop_reason": "absolute bias change",
+      "test_clipped_rmse": 0.8780037941370006,
+      "test_n": 15126,
+      "test_rmse": 0.8780574841321015,
+      "training_rmse": 0.8166725203779724,
+      "wall_seconds": 0.9858603910001875,
+      "warm_item_n": 14425,
+      "warm_item_rmse": 0.8713179204038117
+    }
+  ],
+  "selected_before_test": true,
+  "selection_lock_sha256": "6da1c6cdb2068e77d11aa20bcdb880a2a4c5155a1a414f3d217b178b9c93f811",
+  "status": "one_shot_global_winner_final_evaluation",
+  "test_n": 15126
+}

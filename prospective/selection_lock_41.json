@@ -1,0 +1,52 @@
+{
+  "evaluation_policy": "no test labels accessed; do not modify candidates based on test",
+  "family_winners": {
+    "ADMiRA_lab_variant": {
+      "params": {
+        "rank": 2
+      },
+      "stop_reason": "max_iter",
+      "validation_rmse": 1.4907130958676382
+    },
+    "SVP": {
+      "params": {
+        "rank": 5
+      },
+      "stop_reason": "max_iter",
+      "validation_rmse": 1.3895013608846933
+    },
+    "SVT": {
+      "params": {
+        "threshold": 30.0
+      },
+      "stop_reason": "max_iter",
+      "validation_rmse": 1.7191204138950913
+    },
+    "global_mean": {
+      "params": {},
+      "stop_reason": "closed_form",
+      "validation_rmse": 1.0354423881413948
+    },
+    "user_item_bias": {
+      "params": {
+        "regularization": 5.0
+      },
+      "stop_reason": "absolute bias change",
+      "validation_rmse": 0.8606522315873891
+    }
+  },
+  "global_winner": {
+    "family": "user_item_bias",
+    "params": {
+      "regularization": 5.0
+    },
+    "stop_reason": "absolute bias change",
+    "validation_rmse": 0.8606522315873891
+  },
+  "source_hashes": {
+    "plan": "3bc10952afcb9d494a483cd8dc323d4392907a0494769b601143f72520a41004",
+    "prior_freeze": "00f661e54277b2ca93455ee4d1d29ecf17123412427100d9c393a5595d5ca1f3",
+    "validation_results": "2a13044fbf8d6852d418dbb32d0868a5593eca59c0e555cb62325d894cd213c5"
+  },
+  "status": "selection_frozen_before_test_evaluation"
+}

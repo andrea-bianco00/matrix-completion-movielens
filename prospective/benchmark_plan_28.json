@@ -1,0 +1,96 @@
+{
+  "status": "prevalidation_candidate_protocol_v1",
+  "date": "2026-10-23",
+  "split_manifest": "split_manifest_18.json",
+  "split_indices": "split_indices_18.npz",
+  "selection_metric": "validation_raw_rmse",
+  "prediction_policy": "unclipped_for_selection; report clipped separately",
+  "primary_comparison": "best_validation_configuration_per_family",
+  "candidates": {
+    "global_mean": [
+      {}
+    ],
+    "user_item_bias": [
+      {
+        "regularization": 5.0
+      },
+      {
+        "regularization": 20.0
+      }
+    ],
+    "SVP": [
+      {
+        "rank": 2
+      },
+      {
+        "rank": 5
+      },
+      {
+        "rank": 10
+      }
+    ],
+    "SVT": [
+      {
+        "threshold": 30.0
+      },
+      {
+        "threshold": 60.0
+      },
+      {
+        "threshold": 100.0
+      }
+    ],
+    "ADMiRA_lab_variant": [
+      {
+        "rank": 2
+      },
+      {
+        "rank": 5
+      }
+    ]
+  },
+  "solver_settings": {
+    "SVP": {
+      "step": 1.0,
+      "max_iter": 100,
+      "tol": 1e-06,
+      "svd_tol": 1e-10,
+      "on_arpack_failure": "raise"
+    },
+    "SVT": {
+      "step": 1.0,
+      "max_iter": 50,
+      "tol": 1e-06,
+      "svd_tol": 1e-11,
+      "initial_rank": 8
+    },
+    "ADMiRA_lab_variant": {
+      "max_iter": 100,
+      "tol": 1e-06,
+      "svd_tol": 1e-11,
+      "max_design_bytes": 256000000
+    }
+  },
+  "tie_break": "lowest unrounded validation RMSE; exact ties use first candidate in listed order",
+  "failed_fit_policy": "record exception and resource limit; do not replace failed candidate or modify grid; a family with all failures has no selected fit",
+  "nonconvergence_policy": "max_iter outputs remain eligible, explicitly labeled nonconverged; compare predictive performance not optimizer certificates",
+  "resource_policy": "one BLAS thread; per-fit 120 second wall-time cap; process timeout counts as failure; no silent fallbacks",
+  "missing_item_policy": "low-rank raw predictions are defined for globally indexed items even if not observed in training; report warm/cold item strata separately; no target leakage",
+  "evaluation_policy": "validation is used once to select a candidate within each family; no additional grid expansion based on validation; test only after code and choices frozen",
+  "caveat": "Earlier exploratory audits inspected this MovieLens dataset under other splits; this is not fully independent dataset-level confirmation.",
+  "baseline_implementation_29": {
+    "model": "prediction = training_mean + user_bias + item_bias",
+    "objective": "sum_training_squared_errors + regularization*(sum(user_bias**2)+sum(item_bias**2)); global mean fixed at training mean",
+    "algorithm": "deterministic alternating exact ridge coordinate-block updates, users then items",
+    "max_iter": 100,
+    "tol": 1e-09,
+    "stop": "max absolute coordinate change <= tol, otherwise max_iter",
+    "initialization": "zero user and item biases",
+    "unseen_policy": "user or item absent in training retains zero bias",
+    "candidate_regularizations": [
+      5.0,
+      20.0
+    ],
+    "status": "implemented and unit-tested; integration benchmark runner pending"
+  }
+}

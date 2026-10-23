@@ -1,0 +1,29 @@
+{
+  "source_sha256": "aa289ca83157595d0df6aea1be6a4ded676ddc4385472e8313a8ed9805352646",
+  "source_rows": 100836,
+  "seed": 20261024,
+  "split_method": "numpy.random.default_rng(seed).permutation(n), contiguous 70/15/15 slices; floor boundaries",
+  "counts": {
+    "train": 70585,
+    "validation": 15125,
+    "test": 15126
+  },
+  "index_sha256": {
+    "train": "c26c4e4c5475c5504484eca763041be3e3d688354539d1353d1f47ad3d7d89cc",
+    "validation": "cd7935306158d862f66ac1a01b562a24617364020b3800b0b8395c8db8fa1d43",
+    "test": "1b8ac77331aa5b53558d09c66fd9445afe374b1be38e1d2ff1ffa43cede43bbf"
+  },
+  "rating_scale": [
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    2.5,
+    3.0,
+    3.5,
+    4.0,
+    4.5,
+    5.0
+  ],
+  "data_policy": "Only training values for fitting; validation for tuning; test indices and ratings inaccessible to model-selection code."
+}
