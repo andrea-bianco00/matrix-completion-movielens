@@ -1,4 +1,4 @@
-import json, unittest
+import json, unittest, os
 from pathlib import Path
 import numpy as np
 from validation_32 import score_validation,select_by_family,validation_data
@@ -30,6 +30,8 @@ class TestValidation(unittest.TestCase):
     def test_frozen_real_split(self):
         source=Path(__file__).resolve().parents[2]/'Dimension Reduction and Matrix Completion.zip'
         if not source.exists(): source=Path('/mnt/data/Dimension Reduction and Matrix Completion.zip')
+        source=Path(os.environ.get('MOVIELENS_SOURCE_ZIP', str(source)))
+        if not source.is_file(): self.skipTest('Original MovieLens source ZIP unavailable; set MOVIELENS_SOURCE_ZIP to run this integration test')
         tr,tc,ty,shape=training_data(source)
         vr,vc,vy,warm,vshape=validation_data(source)
         self.assertEqual((len(ty),len(vy)),(70585,15125))
