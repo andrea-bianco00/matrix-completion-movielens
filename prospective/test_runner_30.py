@@ -1,13 +1,17 @@
 import json, tempfile, unittest
 from pathlib import Path
 from runner_30 import run_child, training_data
-SOURCE=Path('/mnt/data/Dimension Reduction and Matrix Completion.zip')
+import os
+SOURCE=Path(os.environ.get('MOVIELENS_SOURCE_ZIP', '/mnt/data/Dimension Reduction and Matrix Completion.zip'))
+requires_original_dataset = unittest.skipUnless(SOURCE.is_file(), 'Original MovieLens source ZIP unavailable; set MOVIELENS_SOURCE_ZIP to run this integration test')
 class RunnerTests(unittest.TestCase):
+    @requires_original_dataset
     def test_verified_training_count(self):
         r,c,y,shape=training_data(SOURCE)
         self.assertEqual(len(y),70585)
         self.assertEqual(shape,(610,9724))
         self.assertEqual(len(r),len(c))
+    @requires_original_dataset
     def test_global_mean_worker(self):
         out=run_child('global_mean',{},SOURCE,15)
         self.assertEqual(out['status'],'ok')
@@ -18,9 +22,11 @@ class RunnerTests(unittest.TestCase):
             bad=Path(d)/'not_dataset.zip';bad.write_bytes(b'bad')
             out=run_child('global_mean',{},bad,15)
             self.assertEqual(out['status'],'error')
+    @requires_original_dataset
     def test_timeout_is_reported(self):
         out=run_child('global_mean',{},SOURCE,0.00001)
         self.assertEqual(out['status'],'timeout')
+    @requires_original_dataset
     def test_unknown_family_not_silently_replaced(self):
         out=run_child('made_up_model',{},SOURCE,15)
         self.assertEqual(out['status'],'error')
